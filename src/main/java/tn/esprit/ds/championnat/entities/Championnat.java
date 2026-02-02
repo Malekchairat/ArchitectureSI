@@ -1,6 +1,7 @@
 package tn.esprit.ds.championnat.entities;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class Championnat {
@@ -16,9 +17,21 @@ public class Championnat {
 
     private Integer annee;
 
-    // ✅ Constructors
-    public Championnat() {
-    }
+    // N–N Championnat ↔ Course (NEW join table)
+    @ManyToMany
+    @JoinTable(
+            name = "championnat_course",
+            joinColumns = @JoinColumn(name = "id_championnat"),
+            inverseJoinColumns = @JoinColumn(name = "id_course")
+    )
+    private List<Course> courses;
+
+    // Independent table related only to Championnat
+    @OneToMany(mappedBy = "championnat")
+    private List<DetailChampionnat> details;
+
+    // Constructors
+    public Championnat() {}
 
     public Championnat(Categorie categorie, String libelleC, Integer annee) {
         this.categorie = categorie;
@@ -26,7 +39,7 @@ public class Championnat {
         this.annee = annee;
     }
 
-    // ✅ Getters & Setters
+    // Getters & Setters
     public Long getIdChampionnat() {
         return idChampionnat;
     }
@@ -57,5 +70,21 @@ public class Championnat {
 
     public void setAnnee(Integer annee) {
         this.annee = annee;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public List<DetailChampionnat> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<DetailChampionnat> details) {
+        this.details = details;
     }
 }

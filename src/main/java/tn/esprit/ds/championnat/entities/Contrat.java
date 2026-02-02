@@ -15,18 +15,25 @@ public class Contrat {
 
     private Boolean archived;
 
-    // Many contracts belong to one pilot
-    @ManyToOne
-    private Pilote pilote;
+    // * Contrats -> 1 Sponsor
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_sponsor")
+    private Sponsor sponsor;
+
+    // * Contrats -> 1 Equipe
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_equipe")
+    private Equipe equipe;
 
     // Constructors
     public Contrat() {}
 
-    public Contrat(Float montant, String annee, Boolean archived, Pilote pilote) {
+    public Contrat(Float montant, String annee, Boolean archived, Sponsor sponsor, Equipe equipe) {
         this.montant = montant;
         this.annee = annee;
         this.archived = archived;
-        this.pilote = pilote;
+        this.sponsor = sponsor;
+        this.equipe = equipe;
     }
 
     // Getters & Setters
@@ -62,11 +69,19 @@ public class Contrat {
         this.archived = archived;
     }
 
-    public Pilote getPilote() {
-        return pilote;
+    public Sponsor getSponsor() {
+        return sponsor;
     }
 
-    public void setPilote(Pilote pilote) {
-        this.pilote = pilote;
+    public void setSponsor(Sponsor sponsor) {
+        this.sponsor = sponsor;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
     }
 }

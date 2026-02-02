@@ -2,6 +2,7 @@ package tn.esprit.ds.championnat.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Course {
@@ -13,6 +14,14 @@ public class Course {
     private String emplacement;
 
     private LocalDate dateCourse;
+
+    // N–N Championnat ↔ Course
+    @ManyToMany(mappedBy = "courses")
+    private List<Championnat> championnats;
+
+    // 1 Course → * Positions
+    @OneToMany(mappedBy = "course")
+    private List<Position> positions;
 
     // Constructors
     public Course() {}
@@ -45,5 +54,21 @@ public class Course {
 
     public void setDateCourse(LocalDate dateCourse) {
         this.dateCourse = dateCourse;
+    }
+
+    public List<Championnat> getChampionnats() {
+        return championnats;
+    }
+
+    public void setChampionnats(List<Championnat> championnats) {
+        this.championnats = championnats;
+    }
+
+    public List<Position> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(List<Position> positions) {
+        this.positions = positions;
     }
 }

@@ -1,6 +1,8 @@
 package tn.esprit.ds.championnat.entities;
 
 import jakarta.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 public class Sponsor {
@@ -17,15 +19,33 @@ public class Sponsor {
 
     private Boolean bloquerContrat;
 
+    // 1 Sponsor -> * Contrats
+    @OneToMany(
+            mappedBy = "sponsor",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Contrat> contrats = new ArrayList<>();
+
     // Constructors
-    public Sponsor() {
-    }
+    public Sponsor() {}
 
     public Sponsor(String nom, String pays, Float budgetAnnuel, Boolean bloquerContrat) {
         this.nom = nom;
         this.pays = pays;
         this.budgetAnnuel = budgetAnnuel;
         this.bloquerContrat = bloquerContrat;
+    }
+
+    // Helper methods
+    public void addContrat(Contrat contrat) {
+        contrats.add(contrat);
+        contrat.setSponsor(this);
+    }
+
+    public void removeContrat(Contrat contrat) {
+        contrats.remove(contrat);
+        contrat.setSponsor(null);
     }
 
     // Getters & Setters
@@ -67,5 +87,13 @@ public class Sponsor {
 
     public void setBloquerContrat(Boolean bloquerContrat) {
         this.bloquerContrat = bloquerContrat;
+    }
+
+    public List<Contrat> getContrats() {
+        return contrats;
+    }
+
+    public void setContrats(List<Contrat> contrats) {
+        this.contrats = contrats;
     }
 }

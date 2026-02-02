@@ -15,18 +15,18 @@ public class Pilote {
 
     private Integer classementGeneral;
 
-    // Many pilots belong to one team
-    @ManyToOne
+    // * Pilotes -> 1 Equipe
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_equipe") // FK column
     private Equipe equipe;
 
     // Constructors
     public Pilote() {}
 
-    public Pilote(String libelleP, Integer nbPointsTotal, Integer classementGeneral, Equipe equipe) {
+    public Pilote(String libelleP, Integer nbPointsTotal, Integer classementGeneral) {
         this.libelleP = libelleP;
         this.nbPointsTotal = nbPointsTotal;
         this.classementGeneral = classementGeneral;
-        this.equipe = equipe;
     }
 
     // Getters & Setters

@@ -2,6 +2,7 @@ package tn.esprit.ds.championnat.entities;
 
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 public class Equipe {
@@ -16,9 +17,13 @@ public class Equipe {
 
     private Integer classementGeneral;
 
-    // Relation: One team has many pilots
-    @OneToMany(mappedBy = "equipe")
-    private List<Pilote> pilotes;
+    // 1 Equipe -> * Pilotes
+    @OneToMany(
+            mappedBy = "equipe",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Pilote> pilotes = new ArrayList<>();
 
     // Constructors
     public Equipe() {}
@@ -27,6 +32,17 @@ public class Equipe {
         this.libelle = libelle;
         this.nbPointsTotal = nbPointsTotal;
         this.classementGeneral = classementGeneral;
+    }
+
+    // Helper methods (VERY good practice)
+    public void addPilote(Pilote pilote) {
+        pilotes.add(pilote);
+        pilote.setEquipe(this);
+    }
+
+    public void removePilote(Pilote pilote) {
+        pilotes.remove(pilote);
+        pilote.setEquipe(null);
     }
 
     // Getters & Setters

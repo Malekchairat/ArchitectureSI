@@ -13,12 +13,13 @@ public class DetailChampionnat {
 
     private String description;
 
-    // 🔗 Relation with Championnat
+    // 🔗 * DetailChampionnat → 1 Championnat
     @ManyToOne
     private Championnat championnat;
 
-    // Constructors
-    public DetailChampionnat() {}
+    // ✅ Constructors
+    public DetailChampionnat() {
+    }
 
     public DetailChampionnat(String code, String description, Championnat championnat) {
         this.code = code;
@@ -26,7 +27,7 @@ public class DetailChampionnat {
         this.championnat = championnat;
     }
 
-    // Getters & Setters
+    // ✅ Getters & Setters
     public Long getIdDetail() {
         return idDetail;
     }
