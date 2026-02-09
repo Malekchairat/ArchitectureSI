@@ -3,6 +3,8 @@ package tn.esprit.ds.championnat.entities;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
+
 
 @Entity
 public class Sponsor {
@@ -96,4 +98,33 @@ public class Sponsor {
     public void setContrats(List<Contrat> contrats) {
         this.contrats = contrats;
     }
+    private Boolean archived;
+    private LocalDate dateCreation;
+    private LocalDate dateDerniereModification;
+
+    public Boolean getArchived() {
+        return archived;
+    }
+
+    public void setArchived(Boolean archived) {
+        this.archived = archived;
+    }
+
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public LocalDate getDateDerniereModification() {
+        return dateDerniereModification;
+    }
+
+    public void setDateDerniereModification(LocalDate dateDerniereModification) {
+        this.dateDerniereModification = dateDerniereModification;
+    }
+
+
 }
