@@ -2,6 +2,10 @@ package tn.esprit.ds.championnat.services;
 
 import tn.esprit.ds.championnat.entities.Pilote;
 
+import java.util.List;
+
 public interface IPiloteService {
-    String addPilote(Pilote p);
+
+    String addPilote(Pilote pilote);
+
 }
