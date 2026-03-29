@@ -8,4 +8,6 @@ public interface IPiloteService {
 
     String addPilote(Pilote pilote);
 
+    String assignPiloteToEquipe(Long piloteId, Long equipeId);
+
 }

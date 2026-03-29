@@ -20,5 +20,10 @@ public class PiloteController {
         return piloteService.addPilote(pilote);
     }
 
+    @PutMapping("/assign/{piloteId}/{equipeId}")
+    public String assignPiloteToEquipe(@PathVariable Long piloteId, @PathVariable Long equipeId) {
+        return piloteService.assignPiloteToEquipe(piloteId, equipeId);
+    }
+
 
 }

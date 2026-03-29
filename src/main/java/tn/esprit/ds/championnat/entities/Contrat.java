@@ -14,6 +14,7 @@ public class Contrat {
     private String annee;
 
     private Boolean archived;
+    private Boolean bloquerContrat;
 
     // * Contrats -> 1 Sponsor
     @ManyToOne(fetch = FetchType.LAZY)
@@ -83,5 +84,14 @@ public class Contrat {
 
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
+    }
+
+
+    public Boolean getBloquerContrat() {
+        return bloquerContrat;
+    }
+
+    public void setBloquerContrat(Boolean bloquerContrat) {
+        this.bloquerContrat = bloquerContrat;
     }
 }

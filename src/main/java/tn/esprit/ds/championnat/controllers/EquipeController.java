@@ -1,5 +1,6 @@
 package tn.esprit.ds.championnat.controllers;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.ds.championnat.entities.Equipe;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+
 
 @RestController
 @RequestMapping("/equipe")
@@ -91,4 +93,7 @@ public class EquipeController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+
 }
