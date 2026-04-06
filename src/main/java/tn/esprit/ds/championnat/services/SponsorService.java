@@ -2,6 +2,7 @@ package tn.esprit.ds.championnat.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.ds.championnat.entities.Contrat;
 import tn.esprit.ds.championnat.entities.Sponsor;
 import tn.esprit.ds.championnat.repositories.SponsorRepository;
 
@@ -62,5 +63,28 @@ public class SponsorService implements ISponsorService {
             return true;
         }
         return false;
+    }
+
+    // ← ADD THIS
+    @Override
+    public float pourcentageBudgetAnnuelConsomme(Long idSponsor) {
+        Sponsor sponsor = sponsorRepository.findByIdWithContrats(idSponsor).orElse(null);
+        if (sponsor == null || sponsor.getBudgetAnnuel() == null || sponsor.getBudgetAnnuel() == 0)
+            return 0;
+
+        int currentYear = LocalDate.now().getYear();
+        float total = 0;
+
+        for (Contrat c : sponsor.getContrats()) {
+            try {
+                if (Integer.parseInt(c.getAnnee()) == currentYear) {
+                    total += c.getMontant();
+                }
+            } catch (Exception e) {
+                System.out.println("Erreur année contrat ID: " + c.getIdContrat());
+            }
+        }
+
+        return (total / sponsor.getBudgetAnnuel()) * 100;
     }
 }

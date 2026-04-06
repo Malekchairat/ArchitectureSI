@@ -15,12 +15,12 @@ public class Pilote {
 
     private Integer classementGeneral;
 
-    // * Pilotes -> 1 Equipe
+    private String categorie; // ← ADD THIS
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_equipe") // FK column
+    @JoinColumn(name = "id_equipe")
     private Equipe equipe;
 
-    // Constructors
     public Pilote() {}
 
     public Pilote(String libelleP, Integer nbPointsTotal, Integer classementGeneral) {
@@ -29,44 +29,21 @@ public class Pilote {
         this.classementGeneral = classementGeneral;
     }
 
-    // Getters & Setters
-    public Long getIdPilote() {
-        return idPilote;
-    }
+    public Long getIdPilote() { return idPilote; }
+    public void setIdPilote(Long idPilote) { this.idPilote = idPilote; }
 
-    public void setIdPilote(Long idPilote) {
-        this.idPilote = idPilote;
-    }
+    public String getLibelleP() { return libelleP; }
+    public void setLibelleP(String libelleP) { this.libelleP = libelleP; }
 
-    public String getLibelleP() {
-        return libelleP;
-    }
+    public Integer getNbPointsTotal() { return nbPointsTotal; }
+    public void setNbPointsTotal(Integer nbPointsTotal) { this.nbPointsTotal = nbPointsTotal; }
 
-    public void setLibelleP(String libelleP) {
-        this.libelleP = libelleP;
-    }
+    public Integer getClassementGeneral() { return classementGeneral; }
+    public void setClassementGeneral(Integer classementGeneral) { this.classementGeneral = classementGeneral; }
 
-    public Integer getNbPointsTotal() {
-        return nbPointsTotal;
-    }
+    public String getCategorie() { return categorie; } // ← ADD THIS
+    public void setCategorie(String categorie) { this.categorie = categorie; } // ← ADD THIS
 
-    public void setNbPointsTotal(Integer nbPointsTotal) {
-        this.nbPointsTotal = nbPointsTotal;
-    }
-
-    public Integer getClassementGeneral() {
-        return classementGeneral;
-    }
-
-    public void setClassementGeneral(Integer classementGeneral) {
-        this.classementGeneral = classementGeneral;
-    }
-
-    public Equipe getEquipe() {
-        return equipe;
-    }
-
-    public void setEquipe(Equipe equipe) {
-        this.equipe = equipe;
-    }
+    public Equipe getEquipe() { return equipe; }
+    public void setEquipe(Equipe equipe) { this.equipe = equipe; }
 }
